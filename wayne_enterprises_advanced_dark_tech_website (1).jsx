@@ -1,0 +1,138 @@
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { useRef } from "react";
+
+export default function WayneSite() {
+  const sections = {
+    about: useRef(null),
+    city: useRef(null),
+    timeline: useRef(null),
+    careers: useRef(null),
+  };
+
+  const scrollTo = (ref) => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <div className="bg-black text-white min-h-screen font-sans">
+      {/* NAV */}
+      <header className="fixed top-0 w-full z-50 flex justify-between items-center px-10 py-6 border-b border-gray-800 bg-black/70 backdrop-blur">
+        <div className="flex items-center gap-3">
+          <img src="/mnt/data/6bf8da38-dc03-4f04-a4e7-4905a23e4fce.png" className="w-10" />
+          <h1 className="text-xl tracking-widest">WAYNE</h1>
+        </div>
+        <nav className="space-x-8 text-sm text-gray-400">
+          <button onClick={() => scrollTo(sections.about)}>About</button>
+          <button onClick={() => scrollTo(sections.city)}>City</button>
+          <button onClick={() => scrollTo(sections.timeline)}>Timeline</button>
+          <button onClick={() => scrollTo(sections.careers)}>Careers</button>
+        </nav>
+      </header>
+
+      {/* HERO */}
+      <section className="h-screen flex flex-col justify-center px-16 relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="text-6xl md:text-7xl font-bold leading-tight">
+            Gotham Reimagined
+          </h2>
+          <p className="mt-6 text-gray-400 max-w-xl">
+            Engineering cities, advancing humanity, and redefining the future through Wayne innovation.
+          </p>
+          <Button className="mt-8">Explore</Button>
+        </motion.div>
+
+        {/* pseudo Three.js background */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="w-full h-full bg-[radial-gradient(circle_at_center,rgba(0,100,255,0.3),transparent_70%)] animate-pulse" />
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section ref={sections.about} className="px-16 py-32 border-t border-gray-900">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h3 className="text-4xl mb-6">About Wayne Enterprises</h3>
+          <p className="text-gray-400 max-w-2xl leading-relaxed">
+            From its origins in early Gotham trade networks to a global technological powerhouse, Wayne Enterprises has continuously shaped urban life. Under generations of leadership, the company expanded into infrastructure, transportation, and advanced research systems.
+          </p>
+        </motion.div>
+      </section>
+
+      {/* CITY BUILDING */}
+      <section ref={sections.city} className="px-16 py-32 bg-zinc-900">
+        <h3 className="text-4xl mb-10">Urban Development</h3>
+        <div className="grid md:grid-cols-3 gap-8">
+          {[
+            "Smart Infrastructure",
+            "Sustainable Energy Grid",
+            "Wayne Tower Systems",
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="bg-black p-6 rounded-2xl border border-gray-800"
+            >
+              <h4 className="text-xl mb-3">{item}</h4>
+              <p className="text-gray-400">
+                Transforming Gotham through advanced architectural systems and intelligent design.
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* TIMELINE */}
+      <section ref={sections.timeline} className="px-16 py-32">
+        <h3 className="text-4xl mb-12">Timeline</h3>
+        <div className="space-y-10 border-l border-gray-800 pl-6">
+          {[
+            "17th Century — Wayne family trade origins",
+            "19th Century — Industrial expansion",
+            "20th Century — Global enterprise",
+            "Modern — AI, aerospace, and defense innovation",
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.2 }}
+            >
+              <p className="text-gray-300">{item}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* CAREERS */}
+      <section ref={sections.careers} className="px-16 py-32 bg-zinc-900">
+        <h3 className="text-4xl mb-10">Careers</h3>
+        <div className="grid md:grid-cols-3 gap-8">
+          {["AI Engineer", "Aerospace Specialist", "Urban Architect"].map((job, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="bg-black p-6 rounded-2xl border border-gray-800"
+            >
+              <h4 className="text-xl mb-3">{job}</h4>
+              <p className="text-gray-400 mb-4">Join Wayne Enterprises and shape the future.</p>
+              <Button>Apply</Button>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="px-16 py-10 border-t border-gray-800 text-gray-500 text-sm">
+        © Wayne Enterprises — Gotham City
+      </footer>
+    </div>
+  );
+}
